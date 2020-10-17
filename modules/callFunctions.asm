@@ -1,0 +1,26 @@
+org 0000h
+	LJMP START
+	MOV R7, #0
+
+;sum rotine
+org 0003h
+INT_TEMP0:
+	MOV R7, #1
+	CLR IE0
+	RETI
+
+;minus rotine
+org 0013h
+INT_TEMP1:
+	MOV R7, #2
+	CLR IE0
+	RETI
+
+org 0080h
+START:
+	SETB EA 
+	SETB EX0 
+	SETB EX1 
+	SETB IT0 	
+	SETB IT1 		
+	SJMP $
