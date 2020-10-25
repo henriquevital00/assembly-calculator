@@ -1,7 +1,8 @@
 ;This module is responsible for sum multiply numbers
 
 MULTIPLY:
-    mov A, #6h
-    mov B, #2h
+    mov A,  R5
+    mov B, R6
     mul AB
-    mov 44h, A    
+    mov R4, A
+    RETI

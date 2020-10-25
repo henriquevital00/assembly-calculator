@@ -1,0 +1,20 @@
+CONTINUECODE:
+	MOV A, R0
+	MOV B, #50h
+	SUBB A, B
+	MOV R0, A
+
+	MOV A, #40h
+	ADD A, R0
+	MOV R0, A
+	MOV A, @R0  
+	ACALL sendCharacter
+
+	CLR F0
+	SETB EA 
+	SETB EX0 
+	SETB EX1 
+	SETB IT0 	
+	SETB IT1 		
+	ACALL delay
+	JMP ROTINA

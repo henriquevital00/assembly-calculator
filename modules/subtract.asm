@@ -1,7 +1,9 @@
 ;This module is responsible for subtract two numbers
 
 SUBTRACT:
-    mov A, #6h
-    mov B, #2h
+    mov A,  R5
+    mov B, R6
     subb A, B
-    mov 44h, A
+	inc A
+    mov R4, A
+    RETI

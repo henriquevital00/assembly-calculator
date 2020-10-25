@@ -1,0 +1,3 @@
+CLEAR:
+	MOV R5, #0h
+	MOV R6, #0h

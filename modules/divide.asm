@@ -1,9 +1,9 @@
 ;This module is responsible for divide two numbers
 
 DIVIDE:
-    mov A, #6h
-    mov B, #2h
+    mov A,  R5
+    mov B, R6
     div AB
-    mov 44h, A
-    mov 45h, B
+    mov R4, A
+    RETI
     

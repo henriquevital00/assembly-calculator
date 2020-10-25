@@ -1,0 +1,10 @@
+SETSECOND_REGISTER:
+	MOV A, R6
+	;se nao for zero ai vamo de conta 
+	JNZ VALIDATE_CONTA
+	MOV A, #50h
+	ADD A, R0
+	MOV R0, A
+	MOV A, @R0  
+	MOV R6, A
+	ACALL CONTINUECODE
