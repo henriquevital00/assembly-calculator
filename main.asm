@@ -51,6 +51,7 @@ START:
 	MOV 5BH, #1	  
 
 MAIN:
+	MOV 70h, #0h
 	ACALL lcd_init
 ROTINA:
 	ACALL leituraTeclado
@@ -436,6 +437,7 @@ CLEAR_ALL:
 	MOV R4, #0h
 	MOV R5, #0h
 	MOV R6, #0h
+	MOV 70h, #0h
 	ACALL clearDisplay
 	ACALL ROTINA
 
