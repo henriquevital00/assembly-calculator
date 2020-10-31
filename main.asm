@@ -53,14 +53,13 @@ START:
 MAIN:
 	MOV 70h, #0h
 	ACALL lcd_init
+ROTINA:
 	CLR F0
 	SETB EA 
 	SETB EX0 
 	SETB EX1 
 	SETB IT0 	
 	SETB IT1 	
-
-ROTINA:
 	ACALL leituraTeclado
 	CJNE R0, #01h, GO_ON
 	;signifca q o cara chamou o =
@@ -441,14 +440,13 @@ CLEAR_ALL:
 	MOV 70h, #0h
 	ACALL clearDisplay
 
-	CLR A
-	MOV R0, #127
-
+	CLR A	
+	MOV R0, #127	
 	ACALL CLEAR_RAM
-
-CLEAR_RAM:
-	MOV @R0, A
-	DJNZ R0,CLEAR_RAM
+	
+CLEAR_RAM:	
+	MOV @R0, A	
+	DJNZ R0,CLEAR_RAM	
 	LJMP START
 
 LONG_DELAY:
