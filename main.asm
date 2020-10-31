@@ -60,7 +60,7 @@ ROTINA:
 
 GO_ON:
 	JNB F0, ROTINA  
-	MOV A, #07h
+	MOV A, 70h
 	ACALL posicionaCursor	
 	MOV A, R4
 	;se ja ha uma conta
@@ -99,13 +99,36 @@ CONTINUECODE:
 	JMP ROTINA
 
 EQUAL_CONTA:
-	;clear lcd
-	CJNE R4, #'+', OP_SUM
-	CJNE R4, #'-', OP_SUBTRACT
-	CJNE R4, #'x', OP_MULTIPLY
-	CJNE R4, #'/', OP_DIVIDE
-	RET
+	ACALL clearDisplay
 
+	;multiplicao
+	MOV A, R4
+	MOV B, #078h
+	SUBB A, B
+	JZ OP_MULTIPLY
+
+	;divisao
+	MOV A, R4
+	MOV B, #02Fh
+	SUBB A, B
+	INC A
+	JZ OP_DIVIDE
+
+	;sutracao
+	MOV A, R4
+	MOV B, #02Dh
+	SUBB A, B
+	INC A
+	JZ OP_SUBTRACT
+
+	;soma
+	MOV A, R4
+	MOV B, #02Bh
+	SUBB A, B
+	INC A
+	JZ OP_SUM
+
+	RET
 
 SETSECOND_REGISTER:
 	;MOV A, R6
@@ -139,8 +162,8 @@ DIVIDE:
 
 MULTIPLY:
 	MOV R4, #'x'	
-	MOV R0, #0
-	MOV A, #2h
+	MOV R0, #2h
+	MOV A, #50h
 	ADD A, R0
 	MOV R0, A
 	MOV A, @R0 
@@ -228,8 +251,19 @@ colScan:
 	RET				
 gotKey:
 	SETB F0	
-	ACALL delay		
-	RET				
+	CALL INCREMENT_CURSOR
+	RET		
+
+INCREMENT_CURSOR:
+    mov A, #0Eh
+	INC 70h
+	CALL delay
+    CJNE A, 70h, RETURN
+    mov 70h, #40h
+	RET		
+
+RETURN:
+    RET
 
 lcd_init:
 
@@ -397,6 +431,8 @@ delay:
 	RET
 
 CLEAR_ALL:
+	MOV R2, #0h
+	MOV R3, #0h
 	MOV R4, #0h
 	MOV R5, #0h
 	MOV R6, #0h
