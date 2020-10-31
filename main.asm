@@ -25,7 +25,7 @@ START:
 	MOV R5, #0
 ; put data in RAM
 	MOV 40H, #'/' 
-	MOV 41H, #'0'
+	MOV 41H, #'='
 	MOV 42H, #'*'
 	MOV 43H, #'9'
 	MOV 44H, #'8'
@@ -38,7 +38,7 @@ START:
 	MOV 4BH, #'1'	
 
     MOV 50H, #'/' 
-	MOV 51H, #0
+	MOV 51H, #'='
 	MOV 52H, #'*'
 	MOV 53H, #9
 	MOV 54H, #8
@@ -54,11 +54,21 @@ MAIN:
 	ACALL lcd_init
 ROTINA:
 	ACALL leituraTeclado
+	CJNE R0, #01h, GO_ON
+	;signifca q o cara chamou o =
+	ACALL EQUAL_CONTA
+
+GO_ON:
 	JNB F0, ROTINA  
 	MOV A, #07h
 	ACALL posicionaCursor	
-	MOV A, R5
+	MOV A, R4
+	;se ja ha uma conta
 	JNZ SETSECOND_REGISTER
+	;conferir se ja digitou o primeiro
+	MOV A, R5
+	;se ja digitou
+	JNZ VALIDARCONTA
 
 SETFIRST_REGISTER:
 	MOV A, #50h
@@ -88,10 +98,19 @@ CONTINUECODE:
 	ACALL delay
 	JMP ROTINA
 
+EQUAL_CONTA:
+	;clear lcd
+	CJNE R4, #'+', OP_SUM
+	CJNE R4, #'-', OP_SUBTRACT
+	CJNE R4, #'x', OP_MULTIPLY
+	CJNE R4, #'/', OP_DIVIDE
+	RET
+
+
 SETSECOND_REGISTER:
-	MOV A, R6
+	;MOV A, R6
 	;se nao for zero ai vamo de conta 
-	JNZ VALIDARCONTA
+	;JNZ VALIDARCONTA
 	MOV A, #50h
 	ADD A, R0
 	MOV R0, A
@@ -109,35 +128,65 @@ VALIDARCONTA:
 	JZ MULTIPLY
 	ACALL ROTINA
 
-
 DIVIDE:
+	MOV R4, #'/'	
+	MOV R0, #0h
+	MOV A, #50h
+	ADD A, R0
+	MOV R0, A
+	MOV A, @R0  
+	ACALL CONTINUECODE
+
+MULTIPLY:
+	MOV R4, #'x'	
+	MOV R0, #0
+	MOV A, #2h
+	ADD A, R0
+	MOV R0, A
+	MOV A, @R0 
+	ACALL CONTINUECODE
+
+OP_DIVIDE:
     mov A,  R5
     mov B, R6
     div AB
-    mov R4, A
+    mov R3, A
+	ACALL LONG_DELAY
+	ACALL CLEAR_ALL
     RETI
 
-MULTIPLY:
+OP_MULTIPLY:
     mov A,  R5
     mov B, R6
     mul AB
-    mov R4, A
-    RETI
+    mov R3, A
+	ACALL LONG_DELAY
+	ACALL CLEAR_ALL
 
-SUBTRACT:
+OP_SUM:
+    mov A,  R5
+    mov B, R6
+    add A, B
+    mov R3, A
+	ACALL LONG_DELAY
+	ACALL CLEAR_ALL
+
+OP_SUBTRACT:
     mov A,  R5
     mov B, R6
     subb A, B
 	inc A
-    mov R4, A
-    RETI
+    mov R3, A
+	ACALL LONG_DELAY
+	ACALL CLEAR_ALL
+
+SUBTRACT:
+	MOV R4, #'-'	
+	RETI
 
 SUM:
-    mov A,  R5
-    mov B, R6
-    add A, B
-    mov R4, A
-    RETI
+	MOV R4, #'+'	
+	RETI
 
 leituraTeclado:
 	MOV R0, #0		
@@ -178,7 +227,8 @@ colScan:
 	INC R0				
 	RET				
 gotKey:
-	SETB F0			
+	SETB F0	
+	ACALL delay		
 	RET				
 
 lcd_init:
@@ -346,8 +396,14 @@ delay:
 	DJNZ R7, $
 	RET
 
-
-CLEAR:
+CLEAR_ALL:
+	MOV R4, #0h
 	MOV R5, #0h
 	MOV R6, #0h
+	ACALL clearDisplay
+	ACALL ROTINA
 
+LONG_DELAY:
+	MOV R7, #255
+	DJNZ R7, $
+	RET
