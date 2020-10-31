@@ -53,6 +53,13 @@ START:
 MAIN:
 	MOV 70h, #0h
 	ACALL lcd_init
+	CLR F0
+	SETB EA 
+	SETB EX0 
+	SETB EX1 
+	SETB IT0 	
+	SETB IT1 	
+
 ROTINA:
 	ACALL leituraTeclado
 	CJNE R0, #01h, GO_ON
@@ -89,13 +96,7 @@ CONTINUECODE:
 	MOV R0, A
 	MOV A, @R0  
 	ACALL sendCharacter
-
-	CLR F0
-	SETB EA 
-	SETB EX0 
-	SETB EX1 
-	SETB IT0 	
-	SETB IT1 		
+	
 	ACALL delay
 	JMP ROTINA
 
@@ -439,7 +440,16 @@ CLEAR_ALL:
 	MOV R6, #0h
 	MOV 70h, #0h
 	ACALL clearDisplay
-	ACALL ROTINA
+
+	CLR A
+	MOV R0, #127
+
+	ACALL CLEAR_RAM
+
+CLEAR_RAM:
+	MOV @R0, A
+	DJNZ R0,CLEAR_RAM
+	LJMP START
 
 LONG_DELAY:
 	MOV R7, #255
