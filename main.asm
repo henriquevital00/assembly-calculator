@@ -21,8 +21,7 @@ INT_TEMP1:
 
 org 0080h
 START:
-	MOV R6, #0
-	MOV R5, #0
+	MOV R4, #0h
 ; put data in RAM
 	MOV 40H, #'/' 
 	MOV 41H, #'='
