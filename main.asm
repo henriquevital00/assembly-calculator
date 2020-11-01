@@ -8,20 +8,40 @@ org 0000h
 ;sum rotine
 org 0003h
 INT_TEMP0:
+	MOV A, 70h
+	CALL INCREMENT_CURSOR
+
 	ACALL SUM
 	CLR IE0
-	RETI
+
+	MOV R0, #0Ch
+	MOV A, #50h
+	ADD A, R0
+	MOV R0, A
+	MOV A, @R0 
+	ACALL CONTINUECODE
 
 ;minus rotine
 org 0013h
 INT_TEMP1:
+	MOV A, 70h
+	CALL INCREMENT_CURSOR
+
 	ACALL SUBTRACT
 	CLR IE0
-	RETI
+
+	MOV R0, #0Dh
+	MOV A, #50h
+	ADD A, R0
+	MOV R0, A
+	MOV A, @R0 
+	ACALL CONTINUECODE
 
 org 0080h
 START:
 	MOV R4, #0h
+	MOV R5, #0h
+	MOV R6, #0h
 ; put data in RAM
 	MOV 40H, #'/' 
 	MOV 41H, #'='
@@ -35,6 +55,8 @@ START:
 	MOV 49H, #'3'
 	MOV 4AH, #'2'
 	MOV 4BH, #'1'	
+	MOV 4CH, #'+'
+	MOV 4DH, #'-'	
 
     MOV 50H, #'/' 
 	MOV 51H, #'='
@@ -147,7 +169,6 @@ VALIDARCONTA:
 	JZ DIVIDE
 	MOV B, #2h
 	SUBB A, B
-	INC A
 	JZ MULTIPLY
 	ACALL ROTINA
 
@@ -176,7 +197,6 @@ OP_DIVIDE:
     mov R3, A
 	ACALL LONG_DELAY
 	ACALL CLEAR_ALL
-    RETI
 
 OP_MULTIPLY:
     mov A,  R5
