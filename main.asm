@@ -121,7 +121,7 @@ CONTINUECODE:
 	JMP ROTINA
 
 EQUAL_CONTA:
-	ACALL clearDisplay
+	;ACALL clearDisplay
 
 	;multiplicao
 	MOV A, R4
@@ -153,9 +153,6 @@ EQUAL_CONTA:
 	RET
 
 SETSECOND_REGISTER:
-	;MOV A, R6
-	;se nao for zero ai vamo de conta 
-	;JNZ VALIDARCONTA
 	MOV A, #50h
 	ADD A, R0
 	MOV R0, A
@@ -189,20 +186,21 @@ MULTIPLY:
 	MOV R0, A
 	MOV A, @R0 
 	ACALL CONTINUECODE
-
-VERIFY_MULT:
-	MOV B, #10h
-	DIV AB
-	ADD A, #30h
-	RET
 	
 SHOW_RESULT:
-	ACALL clearDisplay
-	;exibe a resposta do R3 no lcd
-	mov B, #10h
+	MOV A, 70h
+	ACALL posicionaCursor	
+
+	MOV A, R3
+	MOV B, #10
 	DIV AB
 	ADD A, #30h
 	ACALL sendCharacter
+	MOV A,B
+	ADD A, #30h
+	ACALL sendCharacter
+	ACALL delay
+	;exibe a resposta do R3 no lcd
 	RET
 
 OP_DIVIDE:
@@ -488,6 +486,12 @@ CLEAR_RAM:
 	LJMP START
 
 LONG_DELAY:
+	MOV R7, #255
+	DJNZ R7, $
+	MOV R7, #255
+	DJNZ R7, $
+	MOV R7, #255
+	DJNZ R7, $
 	MOV R7, #255
 	DJNZ R7, $
 	RET
