@@ -69,7 +69,7 @@ START:
 	MOV 58H, #4
 	MOV 59H, #3
 	MOV 5AH, #2
-	MOV 5BH, #1	  
+	MOV 5BH, #1
 
 MAIN:
 	MOV 70h, #0h
@@ -190,11 +190,27 @@ MULTIPLY:
 	MOV A, @R0 
 	ACALL CONTINUECODE
 
+VERIFY_MULT:
+	MOV B, #10h
+	DIV AB
+	ADD A, #30h
+	RET
+	
+SHOW_RESULT:
+	ACALL clearDisplay
+	;exibe a resposta do R3 no lcd
+	mov B, #10h
+	DIV AB
+	ADD A, #30h
+	ACALL sendCharacter
+	RET
+
 OP_DIVIDE:
     mov A,  R5
     mov B, R6
     div AB
     mov R3, A
+	ACALL SHOW_RESULT
 	ACALL LONG_DELAY
 	ACALL CLEAR_ALL
 
@@ -203,6 +219,7 @@ OP_MULTIPLY:
     mov B, R6
     mul AB
     mov R3, A
+	ACALL SHOW_RESULT
 	ACALL LONG_DELAY
 	ACALL CLEAR_ALL
 
@@ -211,6 +228,7 @@ OP_SUM:
     mov B, R6
     add A, B
     mov R3, A
+	ACALL SHOW_RESULT
 	ACALL LONG_DELAY
 	ACALL CLEAR_ALL
 
@@ -220,6 +238,7 @@ OP_SUBTRACT:
     subb A, B
 	inc A
     mov R3, A
+	ACALL SHOW_RESULT
 	ACALL LONG_DELAY
 	ACALL CLEAR_ALL
 
