@@ -189,8 +189,10 @@ MULTIPLY:
 	
 SHOW_RESULT:
 	MOV A, 70h
-	ACALL posicionaCursor	
-
+	ACALL posicionaCursor
+	mov A, #'='
+	ACALL sendCharacter
+	
 	MOV A, R3
 	MOV B, #10
 	DIV AB
