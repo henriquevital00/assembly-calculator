@@ -1,8 +1,8 @@
 MULTIPLY:
-	MOV R4, #'x'	
+	MOV R4, #'x'
 	MOV R0, #2h
 	MOV A, #50h
 	ADD A, R0
 	MOV R0, A
-	MOV A, @R0 
+	MOV A, @R0
 	ACALL CONTINUECODE

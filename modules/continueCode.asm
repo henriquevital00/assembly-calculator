@@ -7,8 +7,8 @@ CONTINUECODE:
 	MOV A, #40h
 	ADD A, R0
 	MOV R0, A
-	MOV A, @R0  
+	MOV A, @R0
 	ACALL sendCharacter
-	
+
 	ACALL delay
 	JMP ROTINA

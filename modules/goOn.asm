@@ -1,7 +1,7 @@
 GO_ON:
-	JNB F0, ROTINA  
+	JNB F0, ROTINA
 	MOV A, 70h
-	ACALL posicionaCursor	
+	ACALL posicionaCursor
 	MOV A, R4
 	;se ja ha uma conta
 	JNZ SETSECOND_REGISTER

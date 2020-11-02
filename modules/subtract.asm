@@ -1,3 +1,3 @@
 SUBTRACT:
-	MOV R4, #'-'	
+	MOV R4, #'-'
 	RETI

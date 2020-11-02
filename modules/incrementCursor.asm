@@ -4,7 +4,7 @@ INCREMENT_CURSOR:
 	CALL delay
     CJNE A, 70h, RETURN
     mov 70h, #40h
-	RET		
+	RET
 
 RETURN:
     RET

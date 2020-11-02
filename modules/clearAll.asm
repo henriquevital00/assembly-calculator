@@ -7,6 +7,6 @@ CLEAR_ALL:
 	MOV 70h, #0h
 	ACALL clearDisplay
 
-	CLR A	
-	MOV R0, #127	
+	CLR A
+	MOV R0, #127
 	ACALL CLEAR_RAM

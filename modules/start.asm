@@ -5,7 +5,7 @@ START:
 	MOV R5, #0h
 	MOV R6, #0h
 ; put data in RAM
-	MOV 40H, #'/' 
+	MOV 40H, #'/'
 	MOV 41H, #'='
 	MOV 42H, #'*'
 	MOV 43H, #'9'
@@ -16,11 +16,11 @@ START:
 	MOV 48H, #'4'
 	MOV 49H, #'3'
 	MOV 4AH, #'2'
-	MOV 4BH, #'1'	
+	MOV 4BH, #'1'
 	MOV 4CH, #'+'
-	MOV 4DH, #'-'	
+	MOV 4DH, #'-'
 
-    MOV 50H, #'/' 
+    MOV 50H, #'/'
 	MOV 51H, #'='
 	MOV 52H, #'*'
 	MOV 53H, #9

@@ -3,7 +3,7 @@ SHOW_RESULT:
 	ACALL posicionaCursor
 	mov A, #'='
 	ACALL sendCharacter
-	
+
 	MOV A, R3
 	MOV B, #10
 	DIV AB
