@@ -1,8 +1,8 @@
-;This module is responsible for sum multiply numbers
-
 MULTIPLY:
-    mov A,  R5
-    mov B, R6
-    mul AB
-    mov R4, A
-    RETI
+	MOV R4, #'x'	
+	MOV R0, #2h
+	MOV A, #50h
+	ADD A, R0
+	MOV R0, A
+	MOV A, @R0 
+	ACALL CONTINUECODE

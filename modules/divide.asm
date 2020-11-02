@@ -1,9 +1,8 @@
-;This module is responsible for divide two numbers
-
 DIVIDE:
-    mov A,  R5
-    mov B, R6
-    div AB
-    mov R4, A
-    RETI
-    
+	MOV R4, #'/'	
+	MOV R0, #0h
+	MOV A, #50h
+	ADD A, R0
+	MOV R0, A
+	MOV A, @R0  
+	ACALL CONTINUECODE
