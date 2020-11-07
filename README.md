@@ -25,5 +25,3 @@ O programa lê os dois números digitados pelo usuário, por meio do keypad, bem
 ## Execução
 
 Tanto no Windows quanto no Linux a execução é feita a partir do simulador do edsim51 (https://www.edsim51.com/), basta ler o arquivo "main.asm" e executar o código com o botão "run".
-n.py
-```
