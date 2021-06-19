@@ -41,7 +41,7 @@
 ## 💻 About The Project
 The program reads the two numbers entered by the user, via the keypad, as well as the desired operation (addition, subtraction, division or multiplication). Displaying the results on the LCD. Allowed operations are: Addition, Subtraction, Division and Multiplication
 
-![app](https://github.com/antuniooh/assembly-calculator/tree/main/images/app.gif)
+![app](https://github.com/antuniooh/assembly-calculator/blob/main/images/app.gif)
 
 <!-- HOW TO RUN -->
 ## 🚀 How To Run
