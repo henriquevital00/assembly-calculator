@@ -14,7 +14,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/antuniooh/assembly-calculator">
-    <img src="https://e7.pngegg.com/pngimages/802/246/png-clipart-logo-calculator-product-design-brand-calculator-electronics-rectangle.png" alt="Logo" width="550">
+    <img src="https://image.freepik.com/free-vector/illustration-calculator-machine_53876-5566.jpg" alt="Logo" width="550">
   </a>
 </p>
 
@@ -41,7 +41,7 @@
 ## 💻 About The Project
 The program reads the two numbers entered by the user, via the keypad, as well as the desired operation (addition, subtraction, division or multiplication). Displaying the results on the LCD. Allowed operations are: Addition, Subtraction, Division and Multiplication
 
-![app](https://github.com/antuniooh/assembly-calculator/blob/master/images/app.gif)
+![app](https://github.com/antuniooh/assembly-calculator/tree/main/images/app.gif)
 
 <!-- HOW TO RUN -->
 ## 🚀 How To Run
